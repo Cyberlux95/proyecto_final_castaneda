@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
+
+#esta funcion crea posts
 @login_required
 def home(request):
 	posts = Post.objects.all()
@@ -19,5 +21,11 @@ def home(request):
 		form = PostForm()
 
 	context = {'posts':posts, 'form' : form }
-	return render(request, 'twitter/newsfeed.html', context) 
+	return render(request, 'twitter/newsfeed.html', context) #cambiar template________________________________________*
  
+#esta funcion borra posts
+ def delete(request, post_id):
+	post = Post.objects.get(id=post_id)
+	post.delete()
+	return redirect('home')
+
