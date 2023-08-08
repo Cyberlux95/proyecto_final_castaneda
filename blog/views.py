@@ -24,7 +24,7 @@ def home(request):
 	return render(request, 'twitter/newsfeed.html', context) #cambiar template________________________________________*
  
 #esta funcion borra posts
- def delete(request, post_id):
+def delete(request, post_id):
 	post = Post.objects.get(id=post_id)
 	post.delete()
 	return redirect('home')
