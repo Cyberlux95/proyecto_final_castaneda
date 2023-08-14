@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog',
     'perfiles',
+    'django.contrib.humanize', # para hacer las fechas más faciles de leer
 ]
 
 MIDDLEWARE = [
@@ -57,9 +58,7 @@ ROOT_URLCONF = 'proyecto_final_castaneda.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            BASE_DIR / "templates"
-        ],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -127,11 +126,14 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = 'home'
-LOGOUT_REDIRECT_URL = 'login'
+LOGIN_REDIRECT_URL = 'login'  #para LoginView
+LOGOUT_REDIRECT_URL = 'home'  #para LogoutView
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 
 LOGIN_URL = 'login'
+
+# Definiendo el path para el directorio de Static Files
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]

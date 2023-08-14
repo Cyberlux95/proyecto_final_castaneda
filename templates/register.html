@@ -1,4 +1,4 @@
-{% extends 'twitter/layout.html' %}
+{% extends 'layout.html' %}
 
 {% block content %}
 <body class="login-page">
@@ -32,11 +32,14 @@
                 {{ form.password2 }}
             </div>
 
+            {% if form.errors %}
+            <p>contraseña es muy corta o muy sencilla.</p>
+            {% endif %}
             <button class="twitter-btn">Registrarse</button>
         </form>
 
         <div class="footer">
-            <a href="#">¿Ya tienes una cuenta? Login</a>
+            <a href="{% url 'login' %}">¿Ya tienes una cuenta? Login</a>
         </div>
 
     </div>

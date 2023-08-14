@@ -1,4 +1,4 @@
-{% extends 'twitter/layout.html' %}
+{% extends 'layout.html' %}
 {% load humanize %}
 {% block content %}
 
@@ -17,10 +17,10 @@
 
                         <p class="card-text">{{ request.user.profile.bio }}</p>
                         <h6 class="card-title font-weight-bold">
-                        {{ request.user.profile.followers.count }} Followers   
+                        {{ request.user.profile.followers.count }} Followers   <!--- changed from user to username, then changed back to user -->
                         {{ request.user.profile.following.count }} Following
                         </h6>
-                        <a href="#" class="btn  text-white rounded-pill">Mi perfil</a>
+                        <a href="#" class="btn  text-white rounded-pill">Mi perfil</a>   
                     </div>
 
                 </div>
@@ -152,9 +152,9 @@
                     Who to Follow
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><a href="#" style="text-decoration: none;color: #657787;">@mundopython</a></li>
-                    <li class="list-group-item"><a href="#" style="text-decoration: none;color: #657787;">@mundopython</a></li>
-                    <li class="list-group-item"><a href="#" style="text-decoration: none;color: #657787;">@mundopython</a></li>
+                    <li class="list-group-item"><a href="https://twitter.com/ManUtd" style="text-decoration: none;color: #657787;">@ManUtd</a></li>
+                    <li class="list-group-item"><a href="https://twitter.com/Cristiano" style="text-decoration: none;color: #657787;">@cristiano</a></li>
+                    <li class="list-group-item"><a href="https://twitter.com/kmbappe" style="text-decoration: none;color: #657787;">@KMbappe</a></li>
                 </ul>
             </div>
         </div>

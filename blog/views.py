@@ -21,7 +21,7 @@ def home(request):
 		form = PostForm()
 
 	context = {'posts':posts, 'form' : form }
-	return render(request, 'twitter/newsfeed.html', context) #cambiar template________________________________________*
+	return render(request, 'newsfeed.html', context) #cambiar template________________________________________*
  
 #esta funcion borra posts
 def delete(request, post_id):

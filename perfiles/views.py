@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Profile
+from .models import Profile, Relationship
 from django.contrib.auth.models import User
 from .forms import UserRegisterForm, ProfileUpdateForm, UserUpdateForm
 from django.contrib.auth.decorators import login_required
@@ -21,7 +21,7 @@ def register(request):
 		form = UserRegisterForm()
 
 	context = {'form' : form}
-	return render(request, 'twitter/register.html', context)
+	return render(request, 'register.html', context)
 
 
 # esta funcion despliega el perfil del usuario
@@ -30,7 +30,7 @@ def profile(request, username):
 	user = User.objects.get(username=username)
 	posts = user.posts.all()
 	context = {'user':user, 'posts':posts}
-	return render(request, 'twitter/profile.html', context)
+	return render(request, 'profile.html', context)
 
 
 
@@ -51,7 +51,7 @@ def editar(request):
 		p_form = ProfileUpdateForm()
 
 	context = {'u_form' : u_form, 'p_form' : p_form}
-	return render(request, 'twitter/editar.html', context)
+	return render(request, 'editar.html', context)
 
 
 # seccion aun no testeada
@@ -59,20 +59,20 @@ def editar(request):
 
 #_____________________________________________________________________________________________
 # FOLLOW Y UNFOLLOW 
-#@login_required
-#def follow(request, username):
-#	current_user = request.user
-#	to_user = User.objects.get(username=username)
-#	to_user_id = to_user
-#	rel = Relationship(from_user=current_user, to_user=to_user_id)
-#	rel.save()
-#	return redirect('home')
+@login_required
+def follow(request, username):
+	current_user = request.user
+	to_user = User.objects.get(username=username)
+	to_user_id = to_user
+	rel = Relationship(from_user=current_user, to_user=to_user_id)
+	rel.save()
+	return redirect('home')
 
-#@login_required
-#def unfollow(request, username):
-#	current_user = request.user
-#	to_user = User.objects.get(username=username)
-#	to_user_id = to_user.id
-#	rel = Relationship.objects.get(from_user=current_user.id, to_user=to_user_id)
-#	rel.delete()
-#	return redirect('home')
+@login_required
+def unfollow(request, username):
+	current_user = request.user
+	to_user = User.objects.get(username=username)
+	to_user_id = to_user.id
+	rel = Relationship.objects.get(from_user=current_user.id, to_user=to_user_id)
+	rel.delete()
+	return redirect('home')
