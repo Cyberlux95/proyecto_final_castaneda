@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 # Create your models here.
 
@@ -14,6 +16,7 @@ class Profile(models.Model):
     def __str__(self):
         return f'Perfil de {self.user.username}'   #no se si es unicamente username o .user.username
 
+
 # seccion no testeada
     def following(self):
         user_ids = Relationship.objects.filter(from_user=self.user)\
@@ -27,10 +30,24 @@ class Profile(models.Model):
 
 
 
-
 class Relationship(models.Model):
         from_user = models.ForeignKey(User, related_name='relationships', on_delete=models.CASCADE)
         to_user = models.ForeignKey(User, related_name='related_to', on_delete=models.CASCADE)
 
         def __str__(self):
                 return f'{self.from_user} to {self.to_user}'
+        
+
+
+
+
+# señal para crear un perfil cada que un usuario sea creado/saved
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+# señal para crear un perfil cada que un usuario sea creado/saved
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()

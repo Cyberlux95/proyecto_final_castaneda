@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 
 
 
-# esta funcion registra a los usuarios
+# this function register the new users - esta funcion registra a los usuarios
 def register(request):
 	if request.method == 'POST':
 		form = UserRegisterForm(request.POST)
@@ -24,7 +24,7 @@ def register(request):
 	return render(request, 'register.html', context)
 
 
-# esta funcion despliega el perfil del usuario
+# this function shows the posts of the profile of the user - esta funcion despliega el perfil del usuario
 
 def profile(request, username):
 	user = User.objects.get(username=username)
@@ -35,7 +35,7 @@ def profile(request, username):
 
 
 
-#esta funcion edita los perfiles
+#this function edits the profiles - esta funcion edita los perfiles
 @login_required
 def editar(request):
 	if request.method == 'POST':
@@ -54,11 +54,10 @@ def editar(request):
 	return render(request, 'editar.html', context)
 
 
-# seccion aun no testeada
 
 
 #_____________________________________________________________________________________________
-# FOLLOW Y UNFOLLOW 
+# FOLLOW and UNFOLLOW 
 @login_required
 def follow(request, username):
 	current_user = request.user
